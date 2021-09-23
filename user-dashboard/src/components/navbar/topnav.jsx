@@ -12,6 +12,7 @@ const Header = ({
   user,
   history,
 }) => {
+  console.log(user);
   if (user) {
     return (
       <NavAfterLogin
@@ -24,7 +25,7 @@ const Header = ({
 };
 const mapStateToProps = (state) => ({
   containerClassName: state.menu,
-  user: state.user,
+  user: state.authUser.user,
 });
 const mapDispatchToProps = (dispatch) => ({
   setContainerClassNames: (classNames) =>

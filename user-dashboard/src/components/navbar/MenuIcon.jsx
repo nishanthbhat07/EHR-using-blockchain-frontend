@@ -13,25 +13,25 @@ const MenuIcon = () => {
           width="106.03"
           height="105"
           transform="matrix(-1 0 0 1 111.41 0)"
-          fill="#F4F0F0"
+          fill="#2f2e2e"
         />
         <rect
           width="117"
           height="13.3333"
           transform="matrix(-1 0 0 1 117 19.6667)"
-          fill="#A9A9A9"
+          fill="#f8f8f8"
         />
         <rect
           width="117"
           height="13.3333"
           transform="matrix(-1 0 0 1 117 41.3333)"
-          fill="#A9A9A9"
+          fill="#f8f8f8"
         />
         <rect
           width="117"
           height="13.3333"
           transform="matrix(-1 0 0 1 117 63)"
-          fill="#A9A9A9"
+          fill="#f8f8f8"
         />
       </svg>
     </Fragment>

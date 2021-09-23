@@ -11,7 +11,6 @@ import "./App.scss";
 const UserView = React.lazy(() => import("./views/user"));
 const AppView = React.lazy(() => import("./views/app"));
 const HomeView = React.lazy(() => import("./views/home"));
-const ViewMain = React.lazy(() => import("./views"));
 
 const AuthRoute = ({ component: Component, authUser, ...rest }) => {
   console.log("APP.js line 16", authUser);
@@ -42,7 +41,6 @@ function App({ user }) {
             <AuthRoute path="/app" authUser={user} component={AppView} />
             <Route exact path="/" render={(props) => <HomeView {...props} />} />
             <Route path="/user" render={(props) => <UserView {...props} />} />
-            {/*<Route path="/" exact render={(props) => <ViewMain {...props} />} />*/}
           </Switch>
         </Router>
       </Suspense>

@@ -57,7 +57,7 @@ a {
 p {
   font-size: 0.85rem;
   line-height: 1.3rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 hr {
   border-top: 1px solid $separator-color;
@@ -132,4 +132,10 @@ main {
   .menu-hidden main {
     margin-left: $main-margin-lg;
   }
+}
+button {
+  transition: 0.2s !important;
+}
+button:hover {
+  background-color: $theme-color-4 !important;
 }

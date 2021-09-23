@@ -33,77 +33,87 @@ export const registerUserError = (message) => ({
   type: Auth.REGISTER_USER_ERROR,
   payload: { message },
 });
+const user = {
+  name: "Nishanth Bhat",
+  email: "nishanthbhat07@outlook.com",
+  id: "abqewz123",
+};
 
 export const loginUser = (creds, history) => (dispatch) => {
   dispatch(loginUserRequest(creds, history));
-  return fetch("http://localhost:5000/login", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(creds),
-  })
-    .then(
-      (resp) => {
-        if (resp.ok) {
-          return resp;
-        } else {
-          var error = new Error(
-            "Error " + resp.status + ": " + resp.statusText
-          );
-          error.resp = resp;
-          throw error;
-        }
-      },
-      (error) => {
-        throw error;
-      }
-    )
-    .then((resp) => resp.json())
-    .then((resp) => {
-      if (resp.success) {
-        localStorage.setItem("token", resp.token);
-        localStorage.setItem("user", JSON.stringify(resp.user));
-        history.push("/app");
-        // Dispatch the success action
-        // console.log(resp);
-        dispatch(loginUserSuccess(resp));
-      }
-    })
-    .catch((e) => dispatch(loginUserError(e.message)));
+  localStorage.setItem("user", JSON.stringify(user));
+  dispatch(loginUserSuccess(user));
+  history.push("/app");
+  // return fetch("http://localhost:5000/login", {
+  //   method: "post",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(creds),
+  // })
+  //   .then(
+  //     (resp) => {
+  //       if (resp.ok) {
+  //         return resp;
+  //       } else {
+  //         var error = new Error(
+  //           "Error " + resp.status + ": " + resp.statusText
+  //         );
+  //         error.resp = resp;
+  //         throw error;
+  //       }
+  //     },
+  //     (error) => {
+  //       throw error;
+  //     }
+  //   )
+  //   .then((resp) => resp.json())
+  //   .then((resp) => {
+  //     if (resp.success) {
+  //       localStorage.setItem("token", resp.token);
+  //       localStorage.setItem("user", JSON.stringify(resp.user));
+  //       history.push("/app");
+  //       // Dispatch the success action
+  //       // console.log(resp);
+  //       dispatch(loginUserSuccess(resp));
+  //     }
+  //   })
+  //   .catch((e) => dispatch(loginUserError(e.message)));
 };
 export const registerUser = (creds, history) => (dispatch) => {
   dispatch(registerUserRequest(creds, history));
-  return fetch("http://localhost:5000/register", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(creds),
-  })
-    .then(
-      (resp) => {
-        if (resp.ok) {
-          return resp;
-        } else {
-          var error = new Error(
-            "Error " + resp.status + ": " + resp.statusText
-          );
-          error.resp = resp;
-          throw error;
-        }
-      },
-      (error) => {
-        throw error;
-      }
-    )
-    .then((resp) => resp.json())
-    .then((resp) => {
-      if (resp.success) {
-        history.push("/user/login");
-        // Dispatch the success action
-        // dispatch(registerUserSuccess(resp));
-      }
-    })
-    .catch((e) => dispatch(registerUserError(e.message)));
+
+  history.push("/user/login");
+  // return fetch("http://localhost:5000/register", {
+  //   method: "post",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(creds),
+  // })
+  //   .then(
+  //     (resp) => {
+  //       if (resp.ok) {
+  //         return resp;
+  //       } else {
+  //         var error = new Error(
+  //           "Error " + resp.status + ": " + resp.statusText
+  //         );
+  //         error.resp = resp;
+  //         throw error;
+  //       }
+  //     },
+  //     (error) => {
+  //       throw error;
+  //     }
+  //   )
+  //   .then((resp) => resp.json())
+  //   .then((resp) => {
+  //     if (resp.success) {
+  //       history.push("/user/login");
+  //       // Dispatch the success action
+  //       // dispatch(registerUserSuccess(resp));
+  //     }
+  //   })
+  //   .catch((e) => dispatch(registerUserError(e.message)));
 };

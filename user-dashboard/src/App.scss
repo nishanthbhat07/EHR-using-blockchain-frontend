@@ -48,7 +48,9 @@ $error-color: #c43d4b;
   bottom: 0;
   left: 0;
 }
-
+.fixed-top {
+  position: absolute !important;
+}
 .separator {
   border-bottom: 1px solid $separator-color;
 }
@@ -84,6 +86,7 @@ $error-color: #c43d4b;
   background: $theme-color-2 !important;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.55) !important;
   border-radius: 72px !important;
+  color: $foreground-color !important;
   .card-header .card-icon {
     right: 5px;
     top: 5px;

@@ -12,7 +12,7 @@ import {
 import { Separator } from "../common/Separator";
 const UserOnBoardingCard = () => {
   return (
-    <Card className="d-flex flex-row mb-4">
+    <Card className="d-flex flex-row mb-4 p-2">
       <div className="d-flex flex-grow-1 min-width-zero">
         <CardBody className=" pl-0 align-self-center  flex-sm-row pl-3">
           <CardHeader style={{ fontSize: 24, marginTop: 15 }}>

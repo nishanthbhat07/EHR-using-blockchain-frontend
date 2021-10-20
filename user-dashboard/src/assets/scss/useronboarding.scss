@@ -1,0 +1,19 @@
+.user_onboaring {
+  padding: 2em;
+}
+input[type="text"]:focus {
+  border: 1px solid $theme-color-5 !important;
+  box-shadow: 0px 5px 5px 2px $theme-color-5 !important;
+}
+textarea:focus {
+  border: 1px solid $theme-color-5 !important;
+  box-shadow: 0px 5px 5px 2px $theme-color-5 !important;
+}
+input[type="password"]:focus {
+  border: 1px solid $theme-color-5 !important;
+  box-shadow: 0px 5px 5px 2px $theme-color-5 !important;
+}
+input[type="email"]:focus {
+  border: 1px solid $theme-color-5 !important;
+  box-shadow: 0px 5px 5px 2px $theme-color-5 !important;
+}

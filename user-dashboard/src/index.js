@@ -6,10 +6,12 @@ import { store } from "./redux/store";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "./assets/vendor/bootstrap.min.css";
 import "react-table/react-table.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "dropzone/dist/min/dropzone.min.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

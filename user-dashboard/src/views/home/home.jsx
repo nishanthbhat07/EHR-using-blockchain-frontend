@@ -1,26 +1,19 @@
 import React from "react";
+import { Row, Col } from "reactstrap";
+import HomePageImage from "./HomePageImage.js";
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
-    <div className="homepage-container">
-      {/*  <div className="content">
-        <div className="text-container">
-          <span className="content-1">Ezlytics</span>
-          <span className="content-2">Easy way to analyse</span>
+    <Row>
+      <Col xs={12} md={12} lg={8}>
+        <div className="landing-page-left">
+          <HomePageImage />
         </div>
-        <button
-          type="button"
-          className="button-container"
-          onClick={() => props.history.push("/user/login")}
-        >
-          <span className="button-content">Start Now</span>
-        </button>
-  </div>*/}
-      {/*
-      <div className="side-pic-container">
-        <img src={HomepageImg} alt="Homepage" />
-</div>*/}
-    </div>
+      </Col>
+      <Col xs={4} className="landing-page-right">
+        <h1>EHR of the Future</h1>
+      </Col>
+    </Row>
   );
 };
 export default HomePage;

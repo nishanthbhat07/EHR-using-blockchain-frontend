@@ -11,27 +11,22 @@ const Sidenav = (props) => (
       >
         <Nav vertical className="list-unstyled">
           <NavItem>
-            <NavLink to="/app/previous-work">
-              <i className="iconsminds-big-data" /> Previous Work
+            <NavLink to="/app/my-data">
+              <i class="fas fa-user" /> My Data
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/app/dataset">
-              <i className="iconsminds-data-cloud" /> Dataset
+            <NavLink to="/app/my-permissions">
+              <i class="fas fa-check" /> My Permissions
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/app/stats">
-              <i className="iconsminds-statistic" /> Statistics
+            <NavLink to="/app/my-prescriptions">
+              <i class="fas fa-file-prescription" /> Prescriptions
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/app/visualize">
-              <i className="iconsminds-monitor-analytics" /> Visualize
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/app">
+            <NavLink to="/">
               <i className="simple-icon-logout" /> Logout
             </NavLink>
           </NavItem>

@@ -10,8 +10,13 @@ const HomePage = () => {
           <HomePageImage />
         </div>
       </Col>
-      <Col xs={4} className="landing-page-right">
-        <h1>EHR of the Future</h1>
+      <Col xs={4}>
+        <div className="landing-page-right">
+          <span>EHR of the Future</span>
+          <span className="subtitle">
+            Store all medical records at one place.
+          </span>
+        </div>
       </Col>
     </Row>
   );

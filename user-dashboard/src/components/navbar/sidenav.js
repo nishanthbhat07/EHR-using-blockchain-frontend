@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 import { Nav, NavItem } from "reactstrap";
 
 const Sidenav = (props) => (
-  <div className="sidebar" style={{ visibility: props.visible }}>
-    <div className="main-menu">
+  <div className="sidebar " style={{ visibility: props.visible }}>
+    <div className="main-menu fixed-left">
       <PerfectScrollbar
         options={{ suppressScrollX: true, wheelPropagation: false }}
       >

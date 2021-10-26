@@ -13,6 +13,7 @@ const Header = ({
   history,
 }) => {
   console.log(user);
+  console.log(history);
   if (user) {
     return (
       <NavAfterLogin

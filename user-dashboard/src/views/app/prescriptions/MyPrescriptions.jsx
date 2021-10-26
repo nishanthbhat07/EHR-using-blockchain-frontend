@@ -2,6 +2,10 @@ import React from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
 import { PDFReader } from "reactjs-pdf-reader";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { Worker } from "@react-pdf-viewer/core";
+
+import { Viewer } from "@react-pdf-viewer/core";
 
 const prescription_data = [
   {
@@ -9,7 +13,9 @@ const prescription_data = [
     doctor_name: "Dr. ABC",
     prescription_date: new Date().toLocaleDateString("en-IN"),
     prescription_name: "Fever",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
+    prescription_url:
+      "https://ipfs.io/ipfs/QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
+    hash: "QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
   },
   {
     id: 1,
@@ -38,13 +44,20 @@ class MyPrescriptions extends React.Component {
     super(props);
     this.state = {
       arr_of_prescriptions: prescription_data,
+      aws_uri: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
+      ipfshash: "QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
     };
+    this.load_prescription = this.load_prescription.bind(this);
   }
 
+  load_prescription = (hash) => {
+    console.log(hash);
+    this.setState({ ipfshash: hash });
+  };
   render() {
     return (
       <Row>
-        <Col xs={6}>
+        <Col xs={12} md={12} lg={6}>
           <Card className="d-flex flex-row mb-4">
             <div className="d-flex flex-grow-1 min-width-zero">
               <CardBody>
@@ -71,6 +84,7 @@ class MyPrescriptions extends React.Component {
                     <RenderPrescription
                       item={item}
                       key={index}
+                      load_prescription={this.load_prescription}
                       history={this.props.history}
                     />
                   ))}
@@ -79,7 +93,7 @@ class MyPrescriptions extends React.Component {
             </div>
           </Card>
         </Col>
-        <Col xs={6}>
+        <Col xs={12} md={12} lg={6}>
           <Card className="d-flex flex-row mb-4">
             <div className="d-flex flex-grow-1 min-width-zero">
               <CardBody>
@@ -90,12 +104,18 @@ class MyPrescriptions extends React.Component {
                 </CardHeader>
                 <Separator className="mb-5" />
 
-                <PDFReader
-                  width={500}
-                  url={
-                    "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf"
-                  }
-                />
+                {/*<PDFReader
+                    width={500}
+                    height={200}
+                    url={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
+                  />*/}
+                <div className="view_prescription">
+                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                    <Viewer
+                      fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
+                    />
+                  </Worker>
+                </div>
               </CardBody>
             </div>
           </Card>
@@ -105,7 +125,7 @@ class MyPrescriptions extends React.Component {
   }
 }
 export default MyPrescriptions;
-const RenderPrescription = ({ item, key, history }) => (
+const RenderPrescription = ({ item, key, history, load_prescription }) => (
   <Row className="prescription_row">
     <Col xs={4}>
       <span className="doctor_name">{item.doctor_name}</span>
@@ -115,7 +135,7 @@ const RenderPrescription = ({ item, key, history }) => (
     </Col>
     <Col xs={4}>
       <Button
-        onClick={() => history.push(item.prescription_url)}
+        onClick={() => load_prescription(item.hash)}
         className="btn btn-multiple-state prescription_button"
       >
         Load Prescription

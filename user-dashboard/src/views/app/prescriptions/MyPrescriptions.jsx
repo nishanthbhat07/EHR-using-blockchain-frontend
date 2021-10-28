@@ -1,11 +1,11 @@
 import React from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
-import { motion } from "framer-motion";
+
 import { Worker } from "@react-pdf-viewer/core";
 import { connect } from "react-redux";
 import { fetchUserPrescription } from "../../../redux/prescriptions/prescriptions.actions";
-import { Fade, FadeTransform, Transform } from "react-animation-components";
+import { Fade, FadeTransform, Stagger } from "react-animation-components";
 import Loader from "../../../components/loader/Loader";
 import { Viewer } from "@react-pdf-viewer/core";
 
@@ -69,8 +69,7 @@ class MyPrescriptions extends React.Component {
       <FadeTransform
         in
         transformProps={{
-          enterTransform: "translateX(0)",
-          exitTransform: "translateX(100%)",
+          exitTransform: "scale(0.5) translateY(-50%)",
         }}
       >
         <Row>
@@ -103,15 +102,19 @@ class MyPrescriptions extends React.Component {
                     </Row>
                     {loading && <Loader />}
                     {error && alert(error)}
-                    {user_prescriptions.length !== 0 &&
-                      this.state.arr_of_prescriptions.map((item, index) => (
-                        <RenderPrescription
-                          item={item}
-                          key={index}
-                          load_prescription={this.load_prescription}
-                          history={this.props.history}
-                        />
-                      ))}
+
+                    {user_prescriptions.length !== 0 && (
+                      <Stagger in>
+                        {user_prescriptions.map((item, index) => (
+                          <RenderPrescription
+                            item={item}
+                            key={index}
+                            load_prescription={this.load_prescription}
+                            history={this.props.history}
+                          />
+                        ))}
+                      </Stagger>
+                    )}
                   </div>
                 </CardBody>
               </div>
@@ -121,29 +124,21 @@ class MyPrescriptions extends React.Component {
             <Card className="d-flex flex-row mb-4">
               <div className="d-flex flex-grow-1 min-width-zero">
                 <CardBody>
-                  <CardHeader
-                    style={{
-                      fontSize: 24,
-                      marginTop: 15,
-                      background: "inherit",
-                    }}
-                  >
-                    Prescription
-                  </CardHeader>
+                  <CardHeader>Prescription</CardHeader>
                   <Separator className="mb-5" />
-
-                  {/*<PDFReader
-                    width={500}
-                    height={200}
-                    url={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
-                  />*/}
-                  <div className="view_prescription">
-                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-                      <Viewer
-                        fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
-                      />
-                    </Worker>
-                  </div>
+                  {loading && <Loader />}
+                  {error && alert(error)}
+                  {user_prescriptions.length !== 0 && (
+                    <Fade in>
+                      <div className="view_prescription">
+                        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                          <Viewer
+                            fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
+                          />
+                        </Worker>
+                      </div>
+                    </Fade>
+                  )}
                 </CardBody>
               </div>
             </Card>
@@ -165,20 +160,22 @@ const mapDispatchToProps = (dispatch) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MyPrescriptions);
 const RenderPrescription = ({ item, key, history, load_prescription }) => (
-  <Row className="prescription_row">
-    <Col xs={4}>
-      <span className="doctor_name">{item.doctor_name}</span>
-    </Col>
-    <Col xs={4}>
-      <span className="prescription_date">{item.prescription_date}</span>
-    </Col>
-    <Col xs={4}>
-      <Button
-        onClick={() => load_prescription(item.hash)}
-        className="btn btn-multiple-state prescription_button"
-      >
-        Load Prescription
-      </Button>
-    </Col>
-  </Row>
+  <Fade in>
+    <Row className="prescription_row">
+      <Col xs={4}>
+        <span className="doctor_name">{item.doctor_name}</span>
+      </Col>
+      <Col xs={4}>
+        <span className="prescription_date">{item.prescription_date}</span>
+      </Col>
+      <Col xs={4}>
+        <Button
+          onClick={() => load_prescription(item.hash)}
+          className="btn btn-multiple-state prescription_button"
+        >
+          Load Prescription
+        </Button>
+      </Col>
+    </Row>
+  </Fade>
 );

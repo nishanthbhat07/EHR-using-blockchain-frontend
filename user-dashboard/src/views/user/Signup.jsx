@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
 import { connect } from "react-redux";
-
+import { Fade, FadeTransform, Transform } from "react-animation-components";
 import Signup from "../../components/login/signup";
 import { registerUser } from "../../redux/auth/user.actions";
 
@@ -77,17 +77,24 @@ class SignUpPage extends React.Component {
   };
   render() {
     return (
-      <Row className="h-100">
-        <Col xs="12" md="10" className="mx-auto my-auto">
-          <Signup
-            {...this.props}
-            fields={this.state}
-            handleChange={this.handleChange}
-            onUserRegister={this.onUserRegister}
-            isLoading={this.props.loading}
-          />
-        </Col>
-      </Row>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Row className="h-100">
+          <Col xs="12" md="10" className="mx-auto my-auto">
+            <Signup
+              {...this.props}
+              fields={this.state}
+              handleChange={this.handleChange}
+              onUserRegister={this.onUserRegister}
+              isLoading={this.props.loading}
+            />
+          </Col>
+        </Row>
+      </FadeTransform>
     );
   }
 }

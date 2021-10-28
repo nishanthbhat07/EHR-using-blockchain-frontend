@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
-
+import { Fade, FadeTransform, Transform } from "react-animation-components";
 class MyData extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +9,12 @@ class MyData extends React.Component {
   }
   render() {
     return (
-      <>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
         <Row>
           <Col xs={6}>
             <Card
@@ -34,7 +39,7 @@ class MyData extends React.Component {
             </Card>
           </Col>
         </Row>
-      </>
+      </FadeTransform>
     );
   }
 }

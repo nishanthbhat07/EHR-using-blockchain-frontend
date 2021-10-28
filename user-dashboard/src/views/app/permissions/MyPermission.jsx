@@ -6,7 +6,7 @@ import Loader from "../../../components/loader/Loader";
 import { fetchUserPermission } from "../../../redux/permissions/permission.actions";
 import { motion } from "framer-motion";
 
-import { Fade, FadeTransform, Transform } from "react-animation-components";
+import { Fade, FadeTransform, Stagger } from "react-animation-components";
 
 const permissions_data = [
   {
@@ -65,8 +65,7 @@ class MyPermission extends React.Component {
       <FadeTransform
         in
         transformProps={{
-          enterTransform: "translateX(0)",
-          exitTransform: "translateX(100%)",
+          exitTransform: "scale(0.5) translateY(-50%)",
         }}
       >
         <Row className="mt-3">
@@ -90,9 +89,11 @@ class MyPermission extends React.Component {
                   {this.props.user_permissions.length !== 0 && (
                     <Row>
                       <Col xs={12}>
-                        {this.props.user_permissions.map((item, index) => (
-                          <RenderPermissions index={index} item={item} />
-                        ))}
+                        <Stagger in>
+                          {this.props.user_permissions.map((item, index) => (
+                            <RenderPermissions index={index} item={item} />
+                          ))}
+                        </Stagger>
                       </Col>
                     </Row>
                   )}
@@ -117,34 +118,36 @@ const mapDispatchToProps = (dispatch) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MyPermission);
 const RenderPermissions = ({ index, item }) => (
-  <React.Fragment key={index}>
-    <Row className="row-permission">
-      <Col lg={{ size: 3 }} xs={4} className="permission_title">
-        {item.doctor_name}
-      </Col>
-      <Col lg={4} xs={4} className="permission_purpose">
-        {item.purpose}
-      </Col>
-      <Col lg={3} xs={4} className="permission_title">
-        {item.prescription_date}
-      </Col>
-      <Col xs={6} md={6} lg={1} className="permission_button_container">
-        <Button
-          onClick={() => console.log("Access Granted")}
-          className="btn btn-multiple-state  permission_button"
-        >
-          <i className="fas fa-check-circle fa-2x" />
-        </Button>
-      </Col>
-      <Col xs={6} md={6} lg={1} className="permission_button_container">
-        <Button
-          onClick={() => console.log("revoked access")}
-          className="btn btn-multiple-state  permission_button"
-        >
-          <i className="far fa-times-circle fa-2x" />
-        </Button>
-      </Col>
-    </Row>
-    <Separator className="mb-5" />
-  </React.Fragment>
+  <Fade in>
+    <React.Fragment key={index}>
+      <Row className="row-permission">
+        <Col lg={{ size: 3 }} xs={4} className="permission_title">
+          {item.doctor_name}
+        </Col>
+        <Col lg={4} xs={4} className="permission_purpose">
+          {item.purpose}
+        </Col>
+        <Col lg={3} xs={4} className="permission_title">
+          {item.prescription_date}
+        </Col>
+        <Col xs={6} md={6} lg={1} className="permission_button_container">
+          <Button
+            onClick={() => console.log("Access Granted")}
+            className="btn btn-multiple-state  permission_button"
+          >
+            <i className="fas fa-check-circle fa-2x" />
+          </Button>
+        </Col>
+        <Col xs={6} md={6} lg={1} className="permission_button_container">
+          <Button
+            onClick={() => console.log("revoked access")}
+            className="btn btn-multiple-state  permission_button"
+          >
+            <i className="far fa-times-circle fa-2x" />
+          </Button>
+        </Col>
+      </Row>
+      <Separator className="mb-5" />
+    </React.Fragment>
+  </Fade>
 );

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import Login from "../../components/login/login";
 import { loginUser } from "../../redux/auth/user.actions";
-
+import { Fade, FadeTransform, Transform } from "react-animation-components";
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -53,18 +53,26 @@ class LoginPage extends React.Component {
     const { email, password } = this.state;
     const initialValues = { email, password };
     return (
-      <Row className="h-100">
-        <Col xs="12" md="10" className="mx-auto my-auto">
-          <Login
-            {...this.props}
-            initialValues={initialValues}
-            validateEmail={this.validateEmail}
-            validatePassword={this.validatePassword}
-            onUserLogin={this.onUserLogin}
-            isLoading={this.props.loading}
-          />
-        </Col>
-      </Row>
+      <FadeTransform
+        in
+        transformProps={{
+          enterTransform: "translateX(0)",
+          exitTransform: "translateX(100%)",
+        }}
+      >
+        <Row className="h-100">
+          <Col xs="12" md="10" className="mx-auto my-auto">
+            <Login
+              {...this.props}
+              initialValues={initialValues}
+              validateEmail={this.validateEmail}
+              validatePassword={this.validatePassword}
+              onUserLogin={this.onUserLogin}
+              isLoading={this.props.loading}
+            />
+          </Col>
+        </Row>
+      </FadeTransform>
     );
   }
 }

@@ -8,7 +8,7 @@ import { fetchUserPrescription } from "../../../redux/prescriptions/prescription
 import { Fade, FadeTransform, Stagger } from "react-animation-components";
 import Loader from "../../../components/loader/Loader";
 import { Viewer } from "@react-pdf-viewer/core";
-
+import { Helmet } from "react-helmet";
 class MyPrescriptions extends React.Component {
   constructor(props) {
     super(props);
@@ -33,85 +33,90 @@ class MyPrescriptions extends React.Component {
   render() {
     const { user_prescriptions, loading, error } = this.props;
     return (
-      <FadeTransform
-        in
-        transformProps={{
-          exitTransform: "scale(0.5) translateY(-50%)",
-        }}
-      >
-        <Row>
-          <Col xs={12} md={12} lg={6}>
-            <Card className="d-flex flex-row mb-4">
-              <div className="d-flex flex-grow-1 min-width-zero">
-                <CardBody>
-                  <CardHeader
-                    style={{
-                      fontSize: 24,
-                      marginTop: 15,
-                      background: "inherit",
-                    }}
-                  >
-                    My Prescriptions
-                  </CardHeader>
-                  <Separator className="mb-5" />
+      <>
+        <Helmet>
+          <title>Prescriptions</title>
+        </Helmet>
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: "scale(0.5) translateY(-50%)",
+          }}
+        >
+          <Row>
+            <Col xs={12} md={12} lg={6}>
+              <Card className="d-flex flex-row mb-4">
+                <div className="d-flex flex-grow-1 min-width-zero">
+                  <CardBody>
+                    <CardHeader
+                      style={{
+                        fontSize: 24,
+                        marginTop: 15,
+                        background: "inherit",
+                      }}
+                    >
+                      My Prescriptions
+                    </CardHeader>
+                    <Separator className="mb-5" />
 
-                  <div className="render_prescription">
-                    <Row>
-                      <Col xs={4} className="prescription_title">
-                        Consulted by
-                      </Col>
-                      <Col xs={4} className="prescription_title">
-                        Date
-                      </Col>
-                      <Col xs={4} className="prescription_title">
-                        Prescription
-                      </Col>
-                    </Row>
+                    <div className="render_prescription">
+                      <Row>
+                        <Col xs={4} className="prescription_title">
+                          Consulted by
+                        </Col>
+                        <Col xs={4} className="prescription_title">
+                          Date
+                        </Col>
+                        <Col xs={4} className="prescription_title">
+                          Prescription
+                        </Col>
+                      </Row>
+                      {loading && <Loader />}
+                      {error && alert(error)}
+
+                      {user_prescriptions.length !== 0 && (
+                        <Stagger in>
+                          {user_prescriptions.map((item, index) => (
+                            <RenderPrescription
+                              item={item}
+                              key={index}
+                              load_prescription={this.load_prescription}
+                              history={this.props.history}
+                            />
+                          ))}
+                        </Stagger>
+                      )}
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+            <Col xs={12} md={12} lg={6}>
+              <Card className="d-flex flex-row mb-4">
+                <div className="d-flex flex-grow-1 min-width-zero">
+                  <CardBody>
+                    <CardHeader>Prescription</CardHeader>
+                    <Separator className="mb-5" />
                     {loading && <Loader />}
                     {error && alert(error)}
-
                     {user_prescriptions.length !== 0 && (
-                      <Stagger in>
-                        {user_prescriptions.map((item, index) => (
-                          <RenderPrescription
-                            item={item}
-                            key={index}
-                            load_prescription={this.load_prescription}
-                            history={this.props.history}
-                          />
-                        ))}
-                      </Stagger>
+                      <Fade in>
+                        <div className="view_prescription">
+                          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                            <Viewer
+                              fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
+                            />
+                          </Worker>
+                        </div>
+                      </Fade>
                     )}
-                  </div>
-                </CardBody>
-              </div>
-            </Card>
-          </Col>
-          <Col xs={12} md={12} lg={6}>
-            <Card className="d-flex flex-row mb-4">
-              <div className="d-flex flex-grow-1 min-width-zero">
-                <CardBody>
-                  <CardHeader>Prescription</CardHeader>
-                  <Separator className="mb-5" />
-                  {loading && <Loader />}
-                  {error && alert(error)}
-                  {user_prescriptions.length !== 0 && (
-                    <Fade in>
-                      <div className="view_prescription">
-                        <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-                          <Viewer
-                            fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
-                          />
-                        </Worker>
-                      </div>
-                    </Fade>
-                  )}
-                </CardBody>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </FadeTransform>
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </FadeTransform>
+      </>
     );
   }
 }

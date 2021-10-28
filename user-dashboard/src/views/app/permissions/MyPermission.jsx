@@ -4,7 +4,7 @@ import { Separator } from "../../../components/common/Separator";
 import { connect } from "react-redux";
 import Loader from "../../../components/loader/Loader";
 import { fetchUserPermission } from "../../../redux/permissions/permission.actions";
-
+import { Helmet } from "react-helmet";
 import { Fade, FadeTransform, Stagger } from "react-animation-components";
 
 class MyPermission extends React.Component {
@@ -23,47 +23,56 @@ class MyPermission extends React.Component {
 
   render() {
     return (
-      <FadeTransform
-        in
-        transformProps={{
-          exitTransform: "scale(0.5) translateY(-50%)",
-        }}
-      >
-        <Row className="mt-3">
-          <Col xs={12}>
-            <Card className="d-flex flex-row mb-4">
-              <div className="d-flex flex-grow-1 min-width-zero">
-                <CardBody>
-                  <Row className="row_header">
-                    <Col lg={{ size: 3 }} xs={4} className="permission_header">
-                      Doctor Name
-                    </Col>
-                    <Col lg={4} xs={4} className="permission_header">
-                      Purpose
-                    </Col>
-                    <Col lg={3} xs={4} className="permission_header">
-                      Date
-                    </Col>
-                  </Row>
-                  {this.props.loading && <Loader />}
-                  {this.props.error && alert(this.props.error)}
-                  {this.props.user_permissions.length !== 0 && (
-                    <Row>
-                      <Col xs={12}>
-                        <Stagger in>
-                          {this.props.user_permissions.map((item, index) => (
-                            <RenderPermissions index={index} item={item} />
-                          ))}
-                        </Stagger>
+      <>
+        <Helmet>
+          <title>Manage Permissions</title>
+        </Helmet>
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: "scale(0.5) translateY(-50%)",
+          }}
+        >
+          <Row className="mt-3">
+            <Col xs={12}>
+              <Card className="d-flex flex-row mb-4">
+                <div className="d-flex flex-grow-1 min-width-zero">
+                  <CardBody>
+                    <Row className="row_header">
+                      <Col
+                        lg={{ size: 3 }}
+                        xs={4}
+                        className="permission_header"
+                      >
+                        Doctor Name
+                      </Col>
+                      <Col lg={4} xs={4} className="permission_header">
+                        Purpose
+                      </Col>
+                      <Col lg={3} xs={4} className="permission_header">
+                        Date
                       </Col>
                     </Row>
-                  )}
-                </CardBody>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </FadeTransform>
+                    {this.props.loading && <Loader />}
+                    {this.props.error && alert(this.props.error)}
+                    {this.props.user_permissions.length !== 0 && (
+                      <Row>
+                        <Col xs={12}>
+                          <Stagger in>
+                            {this.props.user_permissions.map((item, index) => (
+                              <RenderPermissions index={index} item={item} />
+                            ))}
+                          </Stagger>
+                        </Col>
+                      </Row>
+                    )}
+                  </CardBody>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </FadeTransform>
+      </>
     );
   }
 }

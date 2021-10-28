@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 import UserMedicalCard from "../../../components/cards/UserMedicalCard";
+import { Helmet } from "react-helmet";
+
 class UserMedical extends Component {
   constructor(props) {
     super(props);
@@ -37,17 +39,22 @@ class UserMedical extends Component {
 
   render() {
     return (
-      <Row>
-        <Col xs={12}>
-          <UserMedicalCard
-            history={this.props.history}
-            state={this.state}
-            handleChange={this.handleChange}
-            calculateBMI={this.calculateBMI}
-            onFinish={this.onFinish}
-          />
-        </Col>
-      </Row>
+      <>
+        <Helmet>
+          <title>User Medical Details</title>
+        </Helmet>
+        <Row>
+          <Col xs={12}>
+            <UserMedicalCard
+              history={this.props.history}
+              state={this.state}
+              handleChange={this.handleChange}
+              calculateBMI={this.calculateBMI}
+              onFinish={this.onFinish}
+            />
+          </Col>
+        </Row>
+      </>
     );
   }
 }

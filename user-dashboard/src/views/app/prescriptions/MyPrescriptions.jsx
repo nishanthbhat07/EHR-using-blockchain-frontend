@@ -9,43 +9,10 @@ import { Fade, FadeTransform, Stagger } from "react-animation-components";
 import Loader from "../../../components/loader/Loader";
 import { Viewer } from "@react-pdf-viewer/core";
 
-const prescription_data = [
-  {
-    id: 0,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Fever",
-    prescription_url:
-      "https://ipfs.io/ipfs/QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
-    hash: "QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
-  },
-  {
-    id: 1,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Stomach Ache",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-  },
-  {
-    id: 2,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Skin",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-  },
-  {
-    id: 3,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Hair",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-  },
-];
 class MyPrescriptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      arr_of_prescriptions: prescription_data,
       aws_uri: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
       ipfshash: "QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
     };

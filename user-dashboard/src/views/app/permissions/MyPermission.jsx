@@ -4,47 +4,8 @@ import { Separator } from "../../../components/common/Separator";
 import { connect } from "react-redux";
 import Loader from "../../../components/loader/Loader";
 import { fetchUserPermission } from "../../../redux/permissions/permission.actions";
-import { motion } from "framer-motion";
 
 import { Fade, FadeTransform, Stagger } from "react-animation-components";
-
-const permissions_data = [
-  {
-    id: 0,
-    doctor_name: "Dr. Wolfeschlegelsteinhausenbergerdorff",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Fever",
-    prescription_url:
-      "https://ipfs.io/ipfs/QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
-    hash: "QmaKsAAGGrbdC5RwBj7Pq1LhGbgwjhnp5n6keRD4DdCeMe",
-    purpose:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-  },
-  {
-    id: 1,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Stomach Ache",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-    purpose: "TP",
-  },
-  {
-    id: 2,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Skin",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-    purpose: "TP",
-  },
-  {
-    id: 3,
-    doctor_name: "Dr. ABC",
-    prescription_date: new Date().toLocaleDateString("en-IN"),
-    prescription_name: "Hair",
-    prescription_url: "https://hackrx-tier4.s3.ap-south-1.amazonaws.com/na.pdf",
-    purpose: "TP",
-  },
-];
 
 class MyPermission extends React.Component {
   constructor(props) {

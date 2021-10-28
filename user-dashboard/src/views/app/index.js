@@ -8,11 +8,12 @@ const MyData = React.lazy(() => import("./my-data"));
 const MyPermission = React.lazy(() => import("./permissions"));
 const MyPrescriptions = React.lazy(() => import("./prescriptions"));
 const App = ({ match }) => {
+  console.log(match.url);
   return (
     <AppLayout match={match}>
       <Suspense fallback={<div className="loading" />}>
         <Switch>
-          <Redirect exact from={`${match.url}/`} to={`${match.url}/my-data`} />
+          <Redirect exact from={`${match.url}`} to={`${match.url}/my-data`} />
           <Route
             path={`${match.url}/user-on-boarding`}
             render={(props) => <UserOnBoarding {...props} />}

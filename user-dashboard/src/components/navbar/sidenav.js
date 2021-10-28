@@ -12,17 +12,17 @@ const Sidenav = (props) => (
         <Nav vertical className="list-unstyled">
           <NavItem>
             <NavLink to="/app/my-data">
-              <i class="fas fa-user" /> My Data
+              <i className="fas fa-user" /> My Data
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/app/my-permissions">
-              <i class="fas fa-check" /> My Permissions
+              <i className="fas fa-check" /> My Permissions
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/app/my-prescriptions">
-              <i class="fas fa-file-prescription" /> Prescriptions
+              <i className="fas fa-file-prescription" /> Prescriptions
             </NavLink>
           </NavItem>
           <NavItem>

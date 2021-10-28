@@ -39,6 +39,7 @@ $error-color: #c43d4b;
 @import "./assets/scss/useronboarding.scss";
 @import "./assets/scss/prescription.scss";
 @import "./assets/scss/permission.scss";
+@import "./assets/scss/my-data.scss";
 
 .fixed-background {
   background-image: var(--theme-color-1) no-repeat center center fixed;
@@ -57,7 +58,17 @@ $error-color: #c43d4b;
 .separator {
   border-bottom: 1px solid $separator-color;
 }
-
+.separator-dark {
+  border-bottom: 1px solid $separator-color-dark;
+}
+.fa-spinner {
+  color: $theme-color-6 !important;
+}
+.loader {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
 .loading {
   display: inline-block;
   width: 30px;
@@ -88,8 +99,8 @@ $error-color: #c43d4b;
   border: initial;
   background: $theme-color-2 !important;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.55) !important;
-  border-radius: 72px !important;
-  color: $foreground-color !important;
+  border-radius: 24px !important;
+  color: $primary-color !important;
   .card-header .card-icon {
     right: 5px;
     top: 5px;
@@ -113,6 +124,7 @@ $error-color: #c43d4b;
 
   .card-body {
     padding: 1.75rem;
+    color: $foreground-color;
 
     @include respond-below(xs) {
       padding: 1.25rem;
@@ -131,7 +143,10 @@ $error-color: #c43d4b;
   }
 }
 .card-header {
-  font-size: 1.4rem;
+  font-size: 1.4rem !important;
+  margin-top: 15px !important;
+  background-color: inherit !important;
+  color: $foreground-color;
 }
 .card-title {
   font-size: 1.1rem;

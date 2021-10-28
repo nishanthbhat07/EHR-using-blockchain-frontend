@@ -1,0 +1,20 @@
+.card.my-data-card {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 3em;
+  cursor: pointer;
+  border-radius: 24px !important;
+  div {
+    font-size: 34px;
+    color: $foreground-color;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+  }
+  i {
+    padding: 0.3em 1em 0;
+  }
+}

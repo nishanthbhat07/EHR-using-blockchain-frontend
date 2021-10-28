@@ -1,10 +1,12 @@
 import React from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
-import { PDFReader } from "reactjs-pdf-reader";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import { motion } from "framer-motion";
 import { Worker } from "@react-pdf-viewer/core";
-
+import { connect } from "react-redux";
+import { fetchUserPrescription } from "../../../redux/prescriptions/prescriptions.actions";
+import { Fade, FadeTransform, Transform } from "react-animation-components";
+import Loader from "../../../components/loader/Loader";
 import { Viewer } from "@react-pdf-viewer/core";
 
 const prescription_data = [
@@ -54,77 +56,114 @@ class MyPrescriptions extends React.Component {
     console.log(hash);
     this.setState({ ipfshash: hash });
   };
+
+  componentDidMount() {
+    const user_id = JSON.parse(localStorage.getItem("user"));
+    console.log(this.props.user_permissions, "PERMISSIONS");
+    this.props.fetchUserPrescription(user_id._id["$oid"]);
+  }
+
   render() {
+    const { user_prescriptions, loading, error } = this.props;
     return (
-      <Row>
-        <Col xs={12} md={12} lg={6}>
-          <Card className="d-flex flex-row mb-4">
-            <div className="d-flex flex-grow-1 min-width-zero">
-              <CardBody>
-                <CardHeader
-                  style={{ fontSize: 24, marginTop: 15, background: "inherit" }}
-                >
-                  My Prescriptions
-                </CardHeader>
-                <Separator className="mb-5" />
+      <FadeTransform
+        in
+        transformProps={{
+          enterTransform: "translateX(0)",
+          exitTransform: "translateX(100%)",
+        }}
+      >
+        <Row>
+          <Col xs={12} md={12} lg={6}>
+            <Card className="d-flex flex-row mb-4">
+              <div className="d-flex flex-grow-1 min-width-zero">
+                <CardBody>
+                  <CardHeader
+                    style={{
+                      fontSize: 24,
+                      marginTop: 15,
+                      background: "inherit",
+                    }}
+                  >
+                    My Prescriptions
+                  </CardHeader>
+                  <Separator className="mb-5" />
 
-                <div className="render_prescription">
-                  <Row>
-                    <Col xs={4} className="prescription_title">
-                      Consulted by
-                    </Col>
-                    <Col xs={4} className="prescription_title">
-                      Date
-                    </Col>
-                    <Col xs={4} className="prescription_title">
-                      Prescription
-                    </Col>
-                  </Row>
-                  {this.state.arr_of_prescriptions.map((item, index) => (
-                    <RenderPrescription
-                      item={item}
-                      key={index}
-                      load_prescription={this.load_prescription}
-                      history={this.props.history}
-                    />
-                  ))}
-                </div>
-              </CardBody>
-            </div>
-          </Card>
-        </Col>
-        <Col xs={12} md={12} lg={6}>
-          <Card className="d-flex flex-row mb-4">
-            <div className="d-flex flex-grow-1 min-width-zero">
-              <CardBody>
-                <CardHeader
-                  style={{ fontSize: 24, marginTop: 15, background: "inherit" }}
-                >
-                  Prescription
-                </CardHeader>
-                <Separator className="mb-5" />
+                  <div className="render_prescription">
+                    <Row>
+                      <Col xs={4} className="prescription_title">
+                        Consulted by
+                      </Col>
+                      <Col xs={4} className="prescription_title">
+                        Date
+                      </Col>
+                      <Col xs={4} className="prescription_title">
+                        Prescription
+                      </Col>
+                    </Row>
+                    {loading && <Loader />}
+                    {error && alert(error)}
+                    {user_prescriptions.length !== 0 &&
+                      this.state.arr_of_prescriptions.map((item, index) => (
+                        <RenderPrescription
+                          item={item}
+                          key={index}
+                          load_prescription={this.load_prescription}
+                          history={this.props.history}
+                        />
+                      ))}
+                  </div>
+                </CardBody>
+              </div>
+            </Card>
+          </Col>
+          <Col xs={12} md={12} lg={6}>
+            <Card className="d-flex flex-row mb-4">
+              <div className="d-flex flex-grow-1 min-width-zero">
+                <CardBody>
+                  <CardHeader
+                    style={{
+                      fontSize: 24,
+                      marginTop: 15,
+                      background: "inherit",
+                    }}
+                  >
+                    Prescription
+                  </CardHeader>
+                  <Separator className="mb-5" />
 
-                {/*<PDFReader
+                  {/*<PDFReader
                     width={500}
                     height={200}
                     url={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
                   />*/}
-                <div className="view_prescription">
-                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-                    <Viewer
-                      fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
-                    />
-                  </Worker>
-                </div>
-              </CardBody>
-            </div>
-          </Card>
-        </Col>
-      </Row>
+                  <div className="view_prescription">
+                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                      <Viewer
+                        fileUrl={`https://ipfs.infura.io/ipfs/${this.state.ipfshash}?filename=test.pdf`}
+                      />
+                    </Worker>
+                  </div>
+                </CardBody>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </FadeTransform>
     );
   }
 }
-export default MyPrescriptions;
+
+const mapStateToProps = (state) => ({
+  user_prescriptions: state.prescriptions.user_prescriptions,
+  loading: state.prescriptions.loading,
+  error: state.prescriptions.error,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserPrescription: (user_id) => dispatch(fetchUserPrescription(user_id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MyPrescriptions);
 const RenderPrescription = ({ item, key, history, load_prescription }) => (
   <Row className="prescription_row">
     <Col xs={4}>

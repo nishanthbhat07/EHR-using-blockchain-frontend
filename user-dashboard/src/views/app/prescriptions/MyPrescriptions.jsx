@@ -27,7 +27,11 @@ class MyPrescriptions extends React.Component {
   componentDidMount() {
     const user_id = JSON.parse(localStorage.getItem("user"));
     console.log(this.props.user_permissions, "PERMISSIONS");
-    this.props.fetchUserPrescription(user_id._id["$oid"]);
+    if (!user_id._id["$oid"]) {
+      this.props.fetchUserPrescription(user_id.id);
+    } else {
+      this.props.fetchUserPrescription(user_id._id["$oid"]);
+    }
   }
 
   render() {

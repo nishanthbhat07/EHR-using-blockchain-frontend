@@ -18,7 +18,11 @@ class MyPermission extends React.Component {
   componentDidMount() {
     const user_id = JSON.parse(localStorage.getItem("user"));
     console.log(this.props.user_permissions, "PERMISSIONS");
-    this.props.fetchUserPermission(user_id._id["$oid"]);
+    if (!user_id._id["$oid"]) {
+      this.props.fetchUserPermission(user_id.id);
+    } else {
+      this.props.fetchUserPermission(user_id._id["$oid"]);
+    }
   }
 
   render() {

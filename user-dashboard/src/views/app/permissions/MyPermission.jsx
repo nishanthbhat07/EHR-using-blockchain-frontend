@@ -1,11 +1,17 @@
 import React from "react";
 import { Row, Col, Card, Button, CardBody } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
+import { connect } from "react-redux";
+import Loader from "../../../components/loader/Loader";
+import { fetchUserPermission } from "../../../redux/permissions/permission.actions";
+import { motion } from "framer-motion";
+
+import { Fade, FadeTransform, Transform } from "react-animation-components";
 
 const permissions_data = [
   {
     id: 0,
-    doctor_name: "Dr. ABC",
+    doctor_name: "Dr. Wolfeschlegelsteinhausenbergerdorff",
     prescription_date: new Date().toLocaleDateString("en-IN"),
     prescription_name: "Fever",
     prescription_url:
@@ -44,45 +50,74 @@ class MyPermission extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      permissions_data: permissions_data,
+      permissions_data: this.props.user_permissions,
     };
   }
+
+  componentDidMount() {
+    const user_id = JSON.parse(localStorage.getItem("user"));
+    console.log(this.props.user_permissions, "PERMISSIONS");
+    this.props.fetchUserPermission(user_id._id["$oid"]);
+  }
+
   render() {
     return (
-      <Row>
-        <Col xs={12}>
-          <Card className="d-flex flex-row mb-4">
-            <div className="d-flex flex-grow-1 min-width-zero">
-              <CardBody>
-                <Row className="row_header">
-                  <Col lg={{ size: 3 }} xs={4} className="permission_header">
-                    Doctor Name
-                  </Col>
-                  <Col lg={4} xs={4} className="permission_header">
-                    Purpose
-                  </Col>
-                  <Col lg={3} xs={4} className="permission_header">
-                    Date
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    {this.state.permissions_data.map((item, index) => (
-                      <RenderPermissions key={index} item={item} />
-                    ))}
-                  </Col>
-                </Row>
-              </CardBody>
-            </div>
-          </Card>
-        </Col>
-      </Row>
+      <FadeTransform
+        in
+        transformProps={{
+          enterTransform: "translateX(0)",
+          exitTransform: "translateX(100%)",
+        }}
+      >
+        <Row className="mt-3">
+          <Col xs={12}>
+            <Card className="d-flex flex-row mb-4">
+              <div className="d-flex flex-grow-1 min-width-zero">
+                <CardBody>
+                  <Row className="row_header">
+                    <Col lg={{ size: 3 }} xs={4} className="permission_header">
+                      Doctor Name
+                    </Col>
+                    <Col lg={4} xs={4} className="permission_header">
+                      Purpose
+                    </Col>
+                    <Col lg={3} xs={4} className="permission_header">
+                      Date
+                    </Col>
+                  </Row>
+                  {this.props.loading && <Loader />}
+                  {this.props.error && alert(this.props.error)}
+                  {this.props.user_permissions.length !== 0 && (
+                    <Row>
+                      <Col xs={12}>
+                        {this.props.user_permissions.map((item, index) => (
+                          <RenderPermissions index={index} item={item} />
+                        ))}
+                      </Col>
+                    </Row>
+                  )}
+                </CardBody>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </FadeTransform>
     );
   }
 }
-export default MyPermission;
-const RenderPermissions = ({ key, item }) => (
-  <>
+
+const mapStateToProps = (state) => ({
+  user_permissions: state.permissions.user_permissions,
+  loading: state.permissions.loading,
+  error: state.permissions.error,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserPermission: (user_id) => dispatch(fetchUserPermission(user_id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MyPermission);
+const RenderPermissions = ({ index, item }) => (
+  <React.Fragment key={index}>
     <Row className="row-permission">
       <Col lg={{ size: 3 }} xs={4} className="permission_title">
         {item.doctor_name}
@@ -98,7 +133,7 @@ const RenderPermissions = ({ key, item }) => (
           onClick={() => console.log("Access Granted")}
           className="btn btn-multiple-state  permission_button"
         >
-          <i class="fas fa-check-circle fa-2x" />
+          <i className="fas fa-check-circle fa-2x" />
         </Button>
       </Col>
       <Col xs={6} md={6} lg={1} className="permission_button_container">
@@ -106,10 +141,10 @@ const RenderPermissions = ({ key, item }) => (
           onClick={() => console.log("revoked access")}
           className="btn btn-multiple-state  permission_button"
         >
-          <i class="far fa-times-circle fa-2x" />
+          <i className="far fa-times-circle fa-2x" />
         </Button>
       </Col>
     </Row>
     <Separator className="mb-5" />
-  </>
+  </React.Fragment>
 );

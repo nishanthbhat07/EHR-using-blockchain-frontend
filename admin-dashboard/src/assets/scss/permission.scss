@@ -1,0 +1,76 @@
+.permission_title {
+  line-height: 1.6;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  @include respond-below(lg) {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    font-weight: 500;
+    text-align: start;
+  }
+}
+.permission_purpose {
+  line-height: 1.6;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  @include respond-below(lg) {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: start;
+  }
+}
+.permission_button {
+  background-color: $theme-color-3 !important;
+  border-color: $theme-color-3 !important;
+}
+.permission_button_container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.permissions-card {
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  flex-direction: row;
+  margin: 1em;
+  padding: 2em 10em;
+}
+.row-permission {
+  padding: 3em;
+}
+.permission_header {
+  font-size: 24px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: $foreground-color;
+  @include respond-below(lg) {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 700;
+  }
+}
+.row_header {
+  padding: 2em;
+}
+.medical-access-form {
+  padding: 2em;
+  margin: 0 1em;
+}

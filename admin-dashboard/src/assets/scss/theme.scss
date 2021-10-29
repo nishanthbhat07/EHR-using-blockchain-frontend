@@ -1,0 +1,50 @@
+$background-color: #9683de;
+$foreground-color: white;
+$input-background: white;
+$separator-color: #f3f3f3;
+$separator-color-dark: #221e39;
+
+$primary-color: #252525;
+$secondary-color: #8f8f8f;
+$muted-color: #909090;
+
+$linear-gradient: linear-gradient(
+  90deg,
+  #9683de 0%,
+  rgba(238, 123, 123, 0.75) 100%
+);
+$linear-gradient-moz: -moz-linear-gradient(
+  90deg,
+  #9683de 0%,
+  rgba(238, 123, 123, 0.75) 100%
+);
+$theme-color-1: #9683de;
+$theme-color-2: #2f2e2e;
+$theme-color-3: #7856ff;
+$theme-color-4: #453c70;
+$theme-color-5: #7e72b6;
+$theme-color-6: #786ea6;
+
+$theme-color-7: #221e39;
+
+$logoPath: "/assets/svg/logo.svg";
+$userLoginSVG: "/assets/svg/patient.svg";
+
+$navbar-height: 100px;
+$navbar-height-xs: 70px;
+$navbar-height-md: 80px;
+$navbar-height-lg: 90px;
+$main-menu-item-height: 110px;
+$main-menu-width: 120px;
+$main-menu-width-lg: 110px;
+$main-menu-width-md: 100px;
+$main-menu-width-xs: 90px;
+$main-menu-item-height: 110px;
+$menu-collapse-time: 300ms;
+$animation-time-long: 1000ms;
+$animation-time-short: 200ms;
+$sub-menu-width: 230px;
+$sub-menu-width-lg: 230px;
+$sub-menu-width-md: 230px;
+$sub-menu-width-xs: 230px;
+$button-text-color: #f8f8f8;

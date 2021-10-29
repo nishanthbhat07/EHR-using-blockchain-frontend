@@ -1,0 +1,24 @@
+.landing-page-right {
+  font-size: 48px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: $foreground-color;
+  padding: 0.2em;
+  margin: 3em auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+::selection {
+  color: $theme-color-4;
+  background-color: $theme-color-5;
+}
+div.landing-page-right > span.subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.1em;
+  letter-spacing: 2px;
+  padding: 1em auto;
+}

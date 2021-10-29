@@ -37,7 +37,7 @@ class UserOnBoarding extends React.Component {
     return (
       <>
         <Helmet>
-          <title>User Medical Details</title>
+          <title>User Details</title>
         </Helmet>
         <FadeTransform
           in

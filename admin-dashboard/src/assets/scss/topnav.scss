@@ -1,0 +1,139 @@
+.navbar-left {
+  flex-basis: 40%;
+}
+.navbar {
+  height: $navbar-height;
+  padding: 1.5rem 0;
+  margin: 1em 1em 0;
+  background-color: $theme-color-2;
+  box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 0px 0px 24px 24px !important;
+  span {
+    text-align: center;
+    padding: 0 10px;
+    line-height: 14px;
+  }
+  &:hover,
+  &:focus {
+    color: $theme-color-1;
+  }
+}
+.menu-button {
+  color: $secondary-color;
+  width: $main-menu-width;
+  text-align: center;
+
+  svg {
+    height: 18px;
+  }
+
+  &:hover {
+    color: $theme-color-1;
+  }
+
+  @include respond-below(xl) {
+    width: $main-menu-width-lg;
+  }
+
+  @include respond-below(lg) {
+    width: $main-menu-width-md;
+  }
+
+  @include respond-below(sm) {
+    width: 60px;
+  }
+}
+
+.navbar-logo {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  .logo {
+    width: 100%;
+    height: 100%;
+    background: url($logoPath) no-repeat;
+    background-position: center center;
+  }
+  .logo-mobile {
+    width: 100%;
+    height: 100%;
+    background: url($logoPath) no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+  @include respond-below(sm) {
+    width: 80px;
+  }
+
+  @include respond-below(xxs) {
+    width: 20px;
+  }
+}
+
+.without-login-view {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-basis: 40%;
+  a {
+    float: left;
+  }
+  .logo-container {
+    width: 35%;
+    height: inherit;
+  }
+  .navbar-logo-1 {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      background: url($logoPath) no-repeat;
+      background-position: center center;
+    }
+    .logo-mobile {
+      width: 100%;
+      height: 100%;
+      background: url($logoPath) no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
+    @include respond-below(sm) {
+      width: 80px;
+    }
+
+    @include respond-below(xxs) {
+      width: 20px;
+    }
+  }
+  .buttons {
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    button {
+      border-radius: 10px;
+      background: $linear-gradient;
+      background: $linear-gradient-moz;
+      box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.44);
+      font-size: 30px;
+      line-height: 1.4;
+      color: #ffffff;
+      padding: 0.2em;
+      margin-right: 1.5em;
+    }
+  }
+}

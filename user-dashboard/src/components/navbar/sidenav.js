@@ -26,7 +26,13 @@ const Sidenav = (props) => (
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/">
+            <NavLink
+              to="/"
+              onClick={() => {
+                localStorage.clear();
+                props.history.push("/");
+              }}
+            >
               <i className="simple-icon-logout" /> Logout
             </NavLink>
           </NavItem>

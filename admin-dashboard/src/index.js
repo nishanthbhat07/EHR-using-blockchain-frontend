@@ -10,6 +10,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "./assets/vendor/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import "dropzone/dist/min/dropzone.min.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

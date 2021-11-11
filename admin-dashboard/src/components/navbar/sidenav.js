@@ -72,33 +72,6 @@ const Sidenav = (props) => (
                 </NavLink>
               </NavItem>
             ))}
-          {/*<NavItem>
-            <NavLink >
-              <i className="fas fa-user-md" /> All Doctors
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink >
-              <i className="fas fa-wheelchair" /> All Patients
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink >
-              <i className="fas fa-file-medical" />
-              Add New Doctor
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink >
-              <i className="fas fa-user-plus" />
-              Add New Patient
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink >
-              <i className="simple-icon-logout" /> Logout
-            </NavLink>
-          </NavItem>*/}
         </Nav>
       </PerfectScrollbar>
     </div>

@@ -33,17 +33,22 @@ export const registerUserError = (message) => ({
   type: Auth.REGISTER_USER_ERROR,
   payload: { message },
 });
+
 const user = {
-  name: "Nishanth Bhat",
+  _id: { $oid: "60b09b0291efae7540ab81b2" },
   email: "nishanthbhat07@outlook.com",
-  id: "abqewz123",
+  name: "Nishanth Bhat",
 };
 
 export const loginUser = (creds, history) => (dispatch) => {
   dispatch(loginUserRequest(creds, history));
   localStorage.setItem("user", JSON.stringify(user));
-  dispatch(loginUserSuccess(user));
-  history.push("/app");
+  localStorage.setItem("role", "doctor");
+  setTimeout(() => {
+    dispatch(loginUserSuccess(user));
+    history.push("/app");
+  }, 2000);
+
   // return fetch("http://localhost:5000/login", {
   //   method: "post",
   //   headers: {

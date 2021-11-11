@@ -11,6 +11,7 @@ class AppLayout extends Component {
         <div className={containerClassName}>
           <TopNav history={history} />
           <Sidenav
+            history={history}
             visible={
               user && match.path !== "/" && visible ? "visible" : "hidden"
             }

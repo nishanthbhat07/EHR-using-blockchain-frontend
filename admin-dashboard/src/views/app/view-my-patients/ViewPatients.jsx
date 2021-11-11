@@ -1,42 +1,44 @@
 import React, { Fragment } from "react";
-import {
-  Row,
-  Col,
-  Card,
-  Button,
-  CardHeader,
-  CardBody,
-  Input,
-  Label,
-  FormGroup,
-  Form,
-} from "reactstrap";
+import { Row, Col, Card, Button, CardHeader, CardBody } from "reactstrap";
 import { Separator } from "../../../components/common/Separator";
-import { connect } from "react-redux";
-import Loader from "../../../components/loader/Loader";
-import { fetchUserPermission } from "../../../redux/permissions/permission.actions";
+import UploadMedical from "./UploadMedicals";
 import { Helmet } from "react-helmet";
 import { Fade, FadeTransform, Stagger } from "react-animation-components";
-
-class ViewMedical extends React.Component {
+const my_patients = [
+  {
+    id: "1",
+    name: "Aakash Mukhtar",
+    email: "aakashm@gmail.com",
+    gender: "M",
+    dob: "12/05/1999",
+  },
+  {
+    id: "2",
+    name: "Prakash Ahuja",
+    email: "prakash.ahuja@yahoo.com",
+    gender: "M",
+    dob: "16/02/1998",
+  },
+  {
+    id: "3",
+    name: "Dharya Dhavale",
+    email: "dharyadhavale@gmail.com",
+    gender: "M",
+    dob: "02/01/2000",
+  },
+];
+class ViewPatients extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      priv_key: "",
-      public_key: "",
+      my_patients: my_patients,
+      isOpen: false,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.onFinish = this.onFinish.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  showModal = () => {
+    this.setState({ isOpen: !this.state.isOpen });
   };
-  onFinish = () => {
-    console.log(this.state);
-  };
-
   render() {
     return (
       <Fragment>
@@ -56,8 +58,26 @@ class ViewMedical extends React.Component {
                   <CardBody>
                     <CardHeader>My Patients</CardHeader>
                     <Separator className="mb-5" />
+                    <Row className="row_header">
+                      <Col xs={3} className="permission_header">
+                        Name
+                      </Col>
+                      <Col xs={3} className="permission_header">
+                        Gender
+                      </Col>
+                    </Row>
                     <Row>
-                      <Col xs={{ offset: 3, size: 6 }}></Col>
+                      <Col xs={12}>
+                        <Stagger in>
+                          {this.state.my_patients.map((item, index) => (
+                            <RenderPatients
+                              item={item}
+                              index={index}
+                              showModal={this.showModal}
+                            />
+                          ))}
+                        </Stagger>
+                      </Col>
                     </Row>
                   </CardBody>
                 </div>
@@ -65,9 +85,45 @@ class ViewMedical extends React.Component {
             </Col>
           </Row>
         </FadeTransform>
+        <UploadMedical isOpen={this.state.isOpen} showModal={this.showModal} />
       </Fragment>
     );
   }
 }
 
-export default ViewMedical;
+export default ViewPatients;
+const RenderPatients = ({ item, index, showModal }) => (
+  <Fade in>
+    <React.Fragment key={index}>
+      <Row className="row-permission">
+        <Col xs={3} className="permission_title">
+          {item.name}
+        </Col>
+
+        <Col xs={3} className="permission_title">
+          {item.gender}
+        </Col>
+
+        <Col lg={3} className="permission_button_container">
+          <Button
+            size="lg"
+            onClick={showModal}
+            className="btn btn-multiple-state  permission_button"
+          >
+            Upload Prescription
+          </Button>
+        </Col>
+        <Col lg={3} className="permission_button_container">
+          <Button
+            size="lg"
+            onClick={showModal}
+            className="btn btn-multiple-state  permission_button"
+          >
+            Upload Reports
+          </Button>
+        </Col>
+      </Row>
+      <Separator className="mb-5" />
+    </React.Fragment>
+  </Fade>
+);
